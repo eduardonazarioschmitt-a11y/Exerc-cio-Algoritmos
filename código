@@ -1,0 +1,73 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+float calcularMedia(float n1, float n2, float n3) {
+    return (n1 + n2 + n3) / 3;
+}
+
+int main() {
+
+    string nomes[5];
+    float notas[5][3];
+    float medias[5];
+    int qtdAlunos;
+
+    cout << "Quantos alunos deseja cadastrar (max 5)? ";
+    cin >> qtdAlunos;
+
+    if (qtdAlunos > 5) {
+        qtdAlunos = 5;
+    }
+
+    cin.ignore();
+
+    for (int i = 0; i < qtdAlunos; i++) {
+        cout << "\n--- Aluno " << (i + 1) << " ---" << endl;
+
+        cout << "Nome: ";
+        getline(cin, nomes[i]);
+
+        cout << "Nota 1: ";
+        cin >> notas[i][0];
+
+        cout << "Nota 2: ";
+        cin >> notas[i][1];
+
+        cout << "Nota 3: ";
+        cin >> notas[i][2];
+
+        cin.ignore();
+
+        medias[i] = calcularMedia(notas[i][0], notas[i][1], notas[i][2]);
+    }
+
+    cout << "\n\n=========== RESULTADO FINAL ===========" << endl;
+
+    int indiceMaior = 0;
+
+    for (int i = 0; i < qtdAlunos; i++) {
+
+        string situacao;
+        if (medias[i] >= 7) {
+            situacao = "Aprovado";
+        } else {
+            situacao = "Reprovado";
+        }
+
+        cout << "Nome: " << nomes[i] << endl;
+        cout << "Notas: " << notas[i][0] << ", " << notas[i][1] << ", " << notas[i][2] << endl;
+        cout << "Media: " << medias[i] << endl;
+        cout << "Situacao: " << situacao << endl;
+        cout << "----------------------------" << endl;
+
+        if (medias[i] > medias[indiceMaior]) {
+            indiceMaior = i;
+        }
+    }
+
+    cout << "\nO aluno com a maior media da turma foi: " << nomes[indiceMaior]
+         << " (media " << medias[indiceMaior] << ")" << endl;
+
+    return 0;
+}
